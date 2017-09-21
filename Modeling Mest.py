@@ -36,10 +36,11 @@ class Fellow_Pay(Fellows):
     def __init__(self, first_name, last_name, country, happiness_level=None, food=None, subject=None, fun_fact=None):
             Fellows.__init__(self, happiness_level, food, subject, first_name, last_name, country, fun_fact)
             Fellow_Pay.tract_pay += 1
+            if Fellow_Pay.tract_pay > 4:
+                raise Exception("We cannot afford to hire: {}".format(first_name))
 
     def __repr__(self):
-        return "Fellow({} , {})".format(self.full_name, self.country),  \
-               "We cannot afford to hire: {}".format(self.full_name)
+            return "Fellow({} , {})".format(self.full_name, self.country)
 
 
 eit_details = EITs(first_name="Dare", last_name="Adesina", country="Nigeria", fun_fact="Music")
@@ -50,8 +51,7 @@ print(fellow_details)
 print("--------Fellow Hire---------")
 # try:
 for pay in range(5):
-    gift = Fellow_Pay(first_name=raw_input('First name:'), last_name=raw_input("Last name:"),
-                          country=raw_input("Country"))
+    gift = Fellow_Pay(first_name=raw_input('First name:'), last_name=raw_input("Last name:"), country=raw_input("Country"))
     print(gift)
 # except Exception as e:
 #     if Fellow_Pay.tract_pay > 4:
